@@ -32,13 +32,13 @@ function initMap() {
 
     markers.push(marker);
 
-    bounds.extend(marker.position);
-
     marker.addListener('click', function() {
       populateInfoWindow(this, largeInfoWindow);
     });
+    bounds.extend(markers[i].position);
   }
   map.fitBounds(bounds);
+}
 
 function populateInfoWindow(marker, infowindow) {
   if (infowindow.marker != marker) {
@@ -51,14 +51,4 @@ function populateInfoWindow(marker, infowindow) {
   }
 }
 
-  /*
-  var infoWindow = new google.maps.InfoWindow({
-    content: 'This is a Irus Argaman Reserve'
-  });
-  marker.addListener('click', function() {
-    infoWindow.open(map, marker);
-  });
-  */
-}
-
-google.maps.event.addListener(initMap);
+google.maps.event.populateInfoWindow(infoWindow);
