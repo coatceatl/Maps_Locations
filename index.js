@@ -6,6 +6,7 @@ function initMap() {
     center: {lat: 32.2750268, lng: 34.8458601 },
     zoom: 12
   });
+
   var locations = [
     {title: 'Hayarkon Park', location: {lat: 32.0992549, lng: 34.8132114}},
     {title: 'Raanana Park Amphitheater', location: {lat: 32.188737, lng: 34.8527066}},
@@ -15,7 +16,7 @@ function initMap() {
     {title: 'Bahai Gardens', location: {lat: 32.8119338, lng: 34.9866286}}
   ];
 
-  var largeInfowindow = new google.maps.InfoWindow();
+  var largeInfoWindow = new google.maps.InfoWindow();
 
   for (var i = 0; i < locations.length; i++) {
     var position = locations[i].location;
@@ -33,10 +34,7 @@ function initMap() {
     marker.addListener('click', function() {
       populateInfoWindow(this, largeInfoWindow);
     });
-
-    //bounds.extend(markers[i].position);
   }
-  //map.fitBounds(bounds);
 
   document.getElementById('show-listings').addEventListener('click', showListings);
   document.getElementById('hide-listings').addEventListener('click', hideListings);
@@ -68,4 +66,4 @@ function hideListings() {
   }
 }
 
-google.maps.event.populateInfoWindow(infoWindow);
+google.maps.event.populateInfoWindow(marker, infoWindow);
