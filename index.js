@@ -16,14 +16,12 @@ function initMap() {
   ];
 
   var largeInfowindow = new google.maps.InfoWindow();
-  var bounds = new google.maps.LatLngBounds();
 
   for (var i = 0; i < locations.length; i++) {
     var position = locations[i].location;
     var title = locations[i].title;
 
     var marker = new google.maps.Marker({
-      map: map,
       position: position,
       title: title,
       animation: google.maps.Animation.DROP,
@@ -35,9 +33,13 @@ function initMap() {
     marker.addListener('click', function() {
       populateInfoWindow(this, largeInfoWindow);
     });
-    bounds.extend(markers[i].position);
+
+    //bounds.extend(markers[i].position);
   }
-  map.fitBounds(bounds);
+  //map.fitBounds(bounds);
+
+  document.getElementById('show-listings').addEventListener('click', showListings);
+  document.getElementById('hide-listings').addEventListener('click', hideListings);
 }
 
 function populateInfoWindow(marker, infowindow) {
@@ -49,6 +51,15 @@ function populateInfoWindow(marker, infowindow) {
       infowindow.setMarker(null);
     });
   }
+}
+
+function showListings() {
+  var bounds = new google.maps.LatLngBounds();
+  for (var i = 0; i < markers.length; i++) {
+    markers[i].setMap(map);
+    bounds.extend(markers[i].position);
+  }
+  map.fitBounds(bounds);
 }
 
 google.maps.event.populateInfoWindow(infoWindow);
